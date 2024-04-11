@@ -60,7 +60,7 @@ server {
     js_challenge_secret "change me!";
     js_challenge_html "/path/to/body.html";
     js_challenge_bucket_duration 3600;
-    js_challenge_title "Verifying your browser```";
+    js_challenge_title "Verifying your browser...";
 
     location /static {
         js_challenge off;
