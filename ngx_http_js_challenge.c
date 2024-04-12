@@ -447,7 +447,10 @@ static ngx_int_t ngx_http_js_challenge_handler(ngx_http_request_t *r) {
     }
 
     // Extract User-Agent header
-    ngx_str_t user_agent = r->headers_in.user_agent ? r->headers_in.user_agent->value : ngx_null_string;
+    ngx_str_t user_agent = {0, NULL};  // Initialize ngx_str_t with default values.
+    if (r && r->headers_in.user_agent) {
+        user_agent = r->headers_in.user_agent->value;
+    } 
 
     unsigned long bucket = r->start_sec - (r->start_sec % conf->bucket_duration);
     char challenge[SHA1_STR_LEN];
