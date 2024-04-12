@@ -433,7 +433,7 @@ static ngx_int_t ngx_http_js_challenge_handler(ngx_http_request_t *r) {
             header[i].value.len > 0 && header[i].value.len <= 39) {
             // Convert ngx_str_t to NULL-terminated string for is_private_ip
             char ip_str[40];
-            ngx_cpystrn((u_char *)ip_str, header[i].value.data, header[i].value.len + 1);
+            ngx_cpystrn((u_char *)ip_str, addr.data, addr.len + 1);
             if (is_private_ip(ip_str)) {
                 addr = header[i].value;
                 break;
