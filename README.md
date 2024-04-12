@@ -111,7 +111,7 @@ These steps have to be performed on machine with compatible configuration (same 
 
 ### Known limitations (To Do)
 
-* Users with cookies disabled will be stuck in an infinite refresh loop (TODO: redirect with a known query param, if no cookie is specified but the query arg is set, display an error page)
+* None
 
 ### Throughput
 <p align="center">
