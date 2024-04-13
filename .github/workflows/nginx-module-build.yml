@@ -23,9 +23,9 @@ jobs:
 
     - name: Clone NGINX source code
       run: |
-        wget https://nginx.org/download/nginx-${VERSION}.tar.gz
-        tar -xvzf nginx-${VERSION}.tar.gz
-        mv nginx-${VERSION} nginx-source
+        wget https://nginx.org/download/nginx-1.25.4.tar.gz
+        tar -xvzf nginx-1.25.4.tar.gz
+        mv nginx-1.25.4 nginx-source
         echo "NGINX_PATH=~/nginx-source" >> $GITHUB_ENV
 
     - name: Run build script
