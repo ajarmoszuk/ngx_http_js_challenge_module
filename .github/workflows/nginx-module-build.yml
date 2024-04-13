@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y nginx libnginx-mod-http-lua gcc make
+        sudo apt-get install -y nginx gcc make
 
     - name: Clone NGINX source code
       run: |
