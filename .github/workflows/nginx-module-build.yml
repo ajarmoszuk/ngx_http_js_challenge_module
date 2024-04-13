@@ -3,7 +3,7 @@ name: Build NGINX Module
 on:
   push:
     branches:
-      - master
+      - master  # Ensure this matches your main branch name
   pull_request:
     branches:
       - master
@@ -32,16 +32,21 @@ jobs:
         chmod +x build.sh
         ./build.sh
 
+    - name: List modules
+      run: |
+        ls ${NGINX_PATH}/objs
+
     - name: Package module
       run: |
-        tar -czvf ngx_module.tar.gz -C ${NGINX_PATH}/objs *.so
+        find ${NGINX_PATH}/objs -name "*.so" -exec tar -czvf ngx_http_js_challenge_module.tar.gz -C ${NGINX_PATH}/objs {} +
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ngx-module
-        path: ngx_module.tar.gz
+        name: ngx_http_js_challenge_module
+        path: ngx_http_js_challenge_module.tar.gz
 
     - name: Check module output
       run: |
         ls ${NGINX_PATH}/objs/*.so
+
