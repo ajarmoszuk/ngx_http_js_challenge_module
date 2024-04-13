@@ -1,0 +1,46 @@
+name: Build NGINX Module
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y nginx libnginx-mod-http-lua gcc make
+
+    - name: Clone NGINX source code
+      run: |
+        git clone https://github.com/nginx/nginx.git ~/nginx-source
+        echo "NGINX_PATH=~/nginx-source" >> $GITHUB_ENV
+
+    - name: Run build script
+      run: |
+        chmod +x build.sh
+        ./build.sh
+
+    - name: Package module
+      run: |
+        tar -czvf ngx_module.tar.gz -C ${NGINX_PATH}/objs *.so
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ngx-module
+        path: ngx_module.tar.gz
+
+    - name: Check module output
+      run: |
+        ls ${NGINX_PATH}/objs/*.so
