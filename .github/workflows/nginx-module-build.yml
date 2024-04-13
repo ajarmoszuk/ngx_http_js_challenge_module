@@ -21,15 +21,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y nginx gcc make
 
-    - name: Clone NGINX source code
+    - name: Run build script
       run: |
         wget https://nginx.org/download/nginx-1.25.4.tar.gz
         tar -xvzf nginx-1.25.4.tar.gz
-        mv nginx-1.25.4 nginx-source
-        echo "NGINX_PATH=~/nginx-source" >> $GITHUB_ENV
-
-    - name: Run build script
-      run: |
+        echo "NGINX_PATH=~/nginx-1.25.4" >> $GITHUB_ENV
         chmod +x build.sh
         ./build.sh
 
